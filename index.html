@@ -44,15 +44,15 @@
       "name": "Wendy Atelier",
       "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80",
       "url": "https://chola101.github.io/wendy-fashion/",
-      "priceRange": "€165–€420",
-      "address": { "@type": "PostalAddress", "streetAddress": "Rua das Flores", "addressLocality": "Lisbon", "addressCountry": "PT" }
+      "priceRange": "K4,538–K11,550",
+      "address": { "@type": "PostalAddress", "streetAddress": "Cairo Road", "addressLocality": "Lusaka", "addressCountry": "ZM" }
     },
-    { "@type": "Product", "name": "The Mercer Coat", "sku": "WW-MERCER", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Outerwear", "offers": { "@type": "Offer", "price": "420", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" } },
-    { "@type": "Product", "name": "Marlowe Slip Dress", "sku": "WW-MARLOWE", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Dresses", "offers": { "@type": "Offer", "price": "285", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" } },
-    { "@type": "Product", "name": "Hollow Knit", "sku": "WW-HOLLOW", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Knitwear", "offers": { "@type": "Offer", "price": "210", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" } },
-    { "@type": "Product", "name": "Tate Trouser", "sku": "WW-TATE", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Tailoring", "offers": { "@type": "Offer", "price": "190", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" } },
-    { "@type": "Product", "name": "Soft Shoulder Blouse", "sku": "WW-BLOUSE", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Tops", "offers": { "@type": "Offer", "price": "165", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" } },
-    { "@type": "Product", "name": "Field Skirt", "sku": "WW-FIELD", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Skirts", "offers": { "@type": "Offer", "price": "220", "priceCurrency": "EUR", "availability": "https://schema.org/InStock" } }
+    { "@type": "Product", "name": "The Mercer Coat", "sku": "WW-MERCER", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Outerwear", "offers": { "@type": "Offer", "price": "11550", "priceCurrency": "ZMW", "availability": "https://schema.org/InStock" } },
+    { "@type": "Product", "name": "Marlowe Slip Dress", "sku": "WW-MARLOWE", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Dresses", "offers": { "@type": "Offer", "price": "7838", "priceCurrency": "ZMW", "availability": "https://schema.org/InStock" } },
+    { "@type": "Product", "name": "Hollow Knit", "sku": "WW-HOLLOW", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Knitwear", "offers": { "@type": "Offer", "price": "5775", "priceCurrency": "ZMW", "availability": "https://schema.org/InStock" } },
+    { "@type": "Product", "name": "Tate Trouser", "sku": "WW-TATE", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Tailoring", "offers": { "@type": "Offer", "price": "5225", "priceCurrency": "ZMW", "availability": "https://schema.org/InStock" } },
+    { "@type": "Product", "name": "Soft Shoulder Blouse", "sku": "WW-BLOUSE", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Tops", "offers": { "@type": "Offer", "price": "4538", "priceCurrency": "ZMW", "availability": "https://schema.org/InStock" } },
+    { "@type": "Product", "name": "Field Skirt", "sku": "WW-FIELD", "brand": { "@type": "Brand", "name": "Wendy" }, "category": "Skirts", "offers": { "@type": "Offer", "price": "6050", "priceCurrency": "ZMW", "availability": "https://schema.org/InStock" } }
   ]
 }
 </script>
@@ -335,6 +335,8 @@
   .nav-icon:hover{color:var(--oxblood)}
   .nav-icon .count{position:absolute;top:1px;right:0;background:var(--oxblood);color:var(--ivory);font-size:10px;min-width:15px;height:15px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:var(--sans);font-weight:500;line-height:1}
   .nav-icon .count.zero{display:none}
+  .nav-cur{background:none;border:1px solid var(--line);color:var(--ink);font-family:var(--sans);font-size:13px;font-weight:500;border-radius:40px;padding:6px 11px;cursor:pointer;line-height:1;min-width:34px;transition:all .2s}
+  .nav-cur:hover{border-color:var(--ink-soft);color:var(--oxblood)}
 
   /* filter bar */
   .filters{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:24px}
@@ -436,6 +438,7 @@
       <a href="#news">Journal</a>
     </nav>
     <div class="nav-right">
+      <button class="nav-cur" id="curBtn" aria-label="Change currency" title="Change currency"><span id="curLabel">K</span></button>
       <button class="nav-icon" id="savedBtn" aria-label="Saved pieces">
         <svg viewBox="0 0 24 24" width="21" height="21"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
         <span class="count" id="savedCount">0</span>
@@ -499,7 +502,7 @@
 <!-- ticker -->
 <div class="ticker" aria-hidden="true">
   <div class="track">
-    <span>Made in small runs</span><span>Linen · wool · silk</span><span>Free alterations, always</span><span>Atelier in Lisbon</span><span>Made in small runs</span><span>Linen · wool · silk</span><span>Free alterations, always</span><span>Atelier in Lisbon</span>
+    <span>Made in small runs</span><span>Cotton · chitenge · silk</span><span>Free alterations, always</span><span>Atelier in Lusaka</span><span>Made in small runs</span><span>Cotton · chitenge · silk</span><span>Free alterations, always</span><span>Atelier in Lusaka</span>
   </div>
 </div>
 
@@ -605,12 +608,12 @@
   <div class="wrap">
     <div class="inner">
       <div class="img reveal">
-        <img src="https://images.unsplash.com/photo-1581344947727-1da7b06d7e6c?auto=format&fit=crop&w=800&q=80" alt="Inside the Wendy atelier in Lisbon" />
+        <img src="https://images.unsplash.com/photo-1581344947727-1da7b06d7e6c?auto=format&fit=crop&w=800&q=80" alt="Inside the Wendy atelier in Lusaka" />
       </div>
       <div class="body reveal">
         <p class="eyebrow">The atelier</p>
         <h2>Made the <em>slow</em> way, on purpose.</h2>
-        <p>Wendy began around one cutting table in a small Lisbon studio, with the idea that fewer, better garments could be a quiet form of resistance. Every piece is cut and finished by a team of four, in runs of 60 or fewer, from natural fibres sourced within Europe.</p>
+        <p>Wendy began around one cutting table in a small Lusaka studio, with the idea that fewer, better garments could be a quiet form of resistance. Every piece is cut and finished by a team of four, in runs of 60 or fewer, from natural fibres and local chitenge.</p>
         <p>We alter anything you buy, for as long as you own it. If it can't be repaired, we'll take it back.</p>
         <div class="stats">
           <div class="stat"><b>60</b><span>max pieces per run</span></div>
@@ -720,7 +723,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2024 Wendy Atelier, Lda · Rua das Flores, Lisbon</span>
+      <span>© 2024 Wendy Atelier Ltd · Cairo Road, Lusaka, Zambia</span>
       <div class="social">
         <a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">Substack</a>
       </div>
@@ -809,12 +812,36 @@
   /* ---------- commerce: products, cart, wishlist, filter ---------- */
   const $ = (s,r=document)=>r.querySelector(s);
   const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
-  const euro = n => '€' + n;
+
+  // ---- currency (EUR base, ZMW for Zambia) ----
+  const CURRENCIES = {
+    ZMW:{code:'ZMW',symbol:'K',rate:27.5},
+    EUR:{code:'EUR',symbol:'€',rate:1}
+  };
+  const curOrder = ['ZMW','EUR'];
+  let cur = 'ZMW';
+  function formatPrice(eur){
+    const c = CURRENCIES[cur] || CURRENCIES.EUR;
+    const v = Math.round(eur * c.rate);
+    return c.code==='ZMW' ? c.symbol + v.toLocaleString('en-US') : c.symbol + v;
+  }
+  function applyCurrency(){
+    $('#curLabel').textContent = CURRENCIES[cur].symbol;
+    $$('.piece').forEach(p=>{ const pr=p.querySelector('.price'); if(pr && p.dataset.price) pr.textContent = formatPrice(+p.dataset.price); });
+    renderCart();
+    if(activeSheet && activeSheet.id==='savedSheet') renderSaved();
+    if($('#quickView').classList.contains('open') && qvState.id) { $('#qvPrice').textContent=formatPrice(PRODUCTS[qvState.id].price); $('#qvAddPrice').textContent=formatPrice(PRODUCTS[qvState.id].price); }
+  }
+  $('#curBtn').addEventListener('click', ()=>{
+    const i = curOrder.indexOf(cur);
+    cur = curOrder[(i+1)%curOrder.length];
+    save('wendy_cur', cur); applyCurrency();
+  });
 
   const PRODUCTS = {
     mercer:{name:'The Mercer Coat',price:420,cat:'Outerwear',new:true,
       img:'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=80',
-      desc:'A double-faced boiled-wool coat with a clean dropped shoulder. Cut wide enough for a knit underneath, narrow enough to keep its line. Made in Lisbon in runs of 60.',
+      desc:'A double-faced boiled-wool coat with a clean dropped shoulder. Cut wide enough for a knit underneath, narrow enough to keep its line. Made in Lusaka in runs of 60.',
       colors:[['#B08A55','Camel'],['#1C1714','Ink'],['#E6BFB0','Blush']],sizes:['XS','S','M','L']},
     marlowe:{name:'Marlowe Slip Dress',price:285,cat:'Dresses',new:true,
       img:'https://images.unsplash.com/photo-1490481651871-ab68de25d43a?auto=format&fit=crop&w=900&q=80',
@@ -907,7 +934,7 @@
         <div class="sv-img"><img src="${p.img}" alt="${p.name}"></div>
         <div class="sv-body">
           <span class="sv-name">${p.name}</span>
-          <div style="font-family:var(--serif);font-size:16px;margin-top:2px">${euro(p.price)}</div>
+          <div style="font-family:var(--serif);font-size:16px;margin-top:2px">${formatPrice(p.price)}</div>
           <button class="sv-add btn" data-sv-add="${id}" style="padding:9px 16px;font-size:14px">Add to bag</button>
           <button class="sv-remove" data-sv-remove="${id}">Remove</button>
         </div>
@@ -927,12 +954,12 @@
     $('#qvImg').src = p.img; $('#qvImg').alt = p.name;
     $('#qvCat').textContent = p.cat + (p.new ? ' · new in' : '');
     $('#qvName').textContent = p.name;
-    $('#qvPrice').textContent = euro(p.price);
+    $('#qvPrice').textContent = formatPrice(p.price);
     $('#qvDesc').textContent = p.desc;
     $('#qvColors').innerHTML = p.colors.map((c,i)=>`<button class="swatch${i===0?' sel':''}" style="background:${c[0]}" data-ci="${i}" aria-label="${c[1]}" title="${c[1]}"></button>`).join('');
     $('#qvColorName').textContent = p.colors[0][1];
     $('#qvSizes').innerHTML = p.sizes.map(s=>`<button class="size-btn${s===qvState.size?' sel':''}" data-size="${s}">${s}</button>`).join('');
-    $('#qvAddPrice').textContent = euro(p.price);
+    $('#qvAddPrice').textContent = formatPrice(p.price);
     const w = $('#qvWish'); w.dataset.id = id; w.classList.toggle('active', saved.includes(id));
     qv.classList.add('open'); qv.setAttribute('aria-hidden','false'); overlay.classList.add('open'); body.classList.add('no-scroll');
   }
@@ -990,7 +1017,7 @@
           <div class="ci-meta">${p.colors[i.color]?.[1]||''} · ${i.size}</div>
           <div class="ci-row">
             <div class="qty"><button data-dec="${i.key}">−</button><span>${i.qty}</span><button data-inc="${i.key}">+</button></div>
-            <span class="ci-price">${euro(p.price*i.qty)}</span>
+            <span class="ci-price">${formatPrice(p.price*i.qty)}</span>
           </div>
           <button class="ci-remove" data-rm="${i.key}">Remove</button>
         </div>
@@ -1000,8 +1027,8 @@
     $$('[data-dec]',body).forEach(b=>b.addEventListener('click',()=>changeQty(b.dataset.dec,-1)));
     $$('[data-rm]',body).forEach(b=>b.addEventListener('click',()=>removeItem(b.dataset.rm)));
     const total = cart.reduce((n,i)=>n + (PRODUCTS[i.id]?.price||0)*i.qty, 0);
-    foot.innerHTML = `<div class="total"><span>Subtotal</span><b>${euro(total)}</b></div>
-      <button class="btn full" id="checkoutBtn">Checkout · ${euro(total)}</button>`;
+    foot.innerHTML = `<div class="total"><span>Subtotal</span><b>${formatPrice(total)}</b></div>
+      <button class="btn full" id="checkoutBtn">Checkout · ${formatPrice(total)}</button>`;
     $('#checkoutBtn').addEventListener('click', ()=>{ toast('Checkout is a demo — nothing has been charged.'); });
   }
 
@@ -1026,6 +1053,10 @@
   $('#chips').addEventListener('click', e=>{ const c=e.target.closest('.chip'); if(!c) return; curCat=c.dataset.cat; $$('.chip').forEach(x=>x.classList.toggle('active',x===c)); applyFilters(); });
   $('#sortSel').addEventListener('change', e=>{ curSort=e.target.value; applyFilters(); });
   $('#viewAllBtn').addEventListener('click', e=>{ e.preventDefault(); curCat='all'; curSort='feat'; $$('.chip').forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); $('#sortSel').value='feat'; applyFilters(); });
+
+  // apply saved currency + render prices (deferred until storage/helpers exist)
+  cur = load('wendy_cur', cur);
+  applyCurrency();
 
   refreshCounts();
 </script>

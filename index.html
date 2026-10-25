@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wendy — Quiet clothes for loud days</title>
+<meta name="description" content="Wendy is a boutique fashion label making considered, tactile pieces for women who dress for themselves." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ivory:#F5EFE7;
+    --ivory-2:#EFE6DA;
+    --ink:#1C1714;
+    --ink-soft:#5A4F49;
+    --oxblood:#5C1A2B;
+    --blush:#E6BFB0;
+    --gold:#B08A55;
+    --line:rgba(28,23,20,.14);
+    --maxw:1180px;
+    --serif:"Bodoni Moda", Georgia, serif;
+    --sans:"Jost", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --ivory:#17120F;
+      --ivory-2:#1F1814;
+      --ink:#F3ECE2;
+      --ink-soft:#B6A89D;
+      --oxblood:#D98AA0;        /* rose reads better on dark than wine */
+      --blush:#6E3A40;
+      --gold:#C9A574;
+      --line:rgba(243,236,226,.16);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  ::selection{background:var(--oxblood);color:var(--ivory)}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+  /* ---- type scale ---- */
+  .serif{font-family:var(--serif);font-weight:400}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:13px;
+    font-weight:400;
+    letter-spacing:.02em;
+    color:var(--ink-soft);
+  }
+
+  /* ---- header ---- */
+  header{
+    position:sticky; top:0; z-index:30;
+    background:color-mix(in srgb, var(--ivory) 86%, transparent);
+    backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:14px 22px; max-width:var(--maxw); margin:0 auto;
+  }
+  .brand{
+    font-family:var(--serif);
+    font-size:27px; font-weight:500; letter-spacing:.02em;
+    line-height:1;
+  }
+  .brand i{font-style:italic;color:var(--oxblood)}
+  .nav-links{display:none;gap:28px;font-size:15px}
+  .nav-links a{position:relative;color:var(--ink-soft);transition:color .25s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  .bag{
+    font-size:14px;color:var(--ink-soft);
+    border:1px solid var(--line);border-radius:40px;
+    padding:7px 14px;display:inline-flex;gap:7px;align-items:center;
+  }
+  .menu-btn{
+    display:inline-flex;flex-direction:column;gap:4px;background:none;border:0;cursor:pointer;padding:8px;
+  }
+  .menu-btn span{width:22px;height:1.5px;background:var(--ink);display:block}
+  @media(min-width:760px){.nav-links{display:flex}.menu-btn{display:none}}
+
+  /* mobile drawer */
+  .drawer{
+    position:fixed;inset:0;z-index:40;background:var(--ivory);
+    transform:translateX(100%);transition:transform .35s ease;
+    display:flex;flex-direction:column;padding:18px 22px;
+  }
+  .drawer.open{transform:none}
+  .drawer .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+  .close{font-size:30px;background:none;border:0;color:var(--ink);line-height:1;cursor:pointer}
+  .drawer nav{display:flex;flex-direction:column;gap:26px;font-family:var(--serif);font-size:30px}
+  .drawer nav a{border-bottom:1px solid var(--line);padding-bottom:18px}
+
+  /* ---- hero ---- */
+  .hero{position:relative;overflow:hidden;padding:54px 0 70px}
+  .hero-grid{display:grid;gap:34px;align-items:center}
+  @media(min-width:880px){.hero-grid{grid-template-columns:1.05fr .95fr;gap:54px}}
+  .hero h1{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(48px,13vw,108px);
+    line-height:.92; letter-spacing:-.01em;
+    margin:18px 0 26px;
+  }
+  .hero h1 .line{display:block;overflow:hidden}
+  .hero h1 .line span{display:block;transform:translateY(110%);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+  .hero.in h1 .line span{transform:none}
+  .hero h1 .line:nth-child(2) span{transition-delay:.08s}
+  .hero h1 .line:nth-child(3) span{transition-delay:.16s}
+  .hero h1 em{font-style:italic;color:var(--oxblood)}
+  .hero .lede{max-width:40ch;color:var(--ink-soft);font-size:18px;margin-bottom:34px;opacity:0;transform:translateY(14px);transition:all .8s .4s ease}
+  .hero.in .lede{opacity:1;transform:none}
+  .ctas{display:flex;gap:12px;flex-wrap:wrap;opacity:0;transform:translateY(14px);transition:all .8s .55s ease}
+  .hero.in .ctas{opacity:1;transform:none}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:15px; padding:14px 24px; border-radius:2px;
+    border:1px solid var(--ink); background:var(--ink); color:var(--ivory);
+    transition:background .2s,color .2s,border-color .2s,transform .15s;
+    cursor:pointer; font-family:var(--sans);
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn.ghost{background:none;color:var(--ink);border-color:var(--line)}
+  .btn .arr{transition:transform .25s}
+  .btn:hover .arr{transform:translateX(4px)}
+
+  .hero-art{position:relative}
+  .hero-art .frame{
+    aspect-ratio:3/4; width:100%;
+    background:linear-gradient(150deg,var(--blush),var(--oxblood));
+    border-radius:2px; overflow:hidden; position:relative;
+  }
+  .hero-art .frame img{width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:.92}
+  @media (prefers-color-scheme: dark){
+    .hero-art .frame img{mix-blend-mode:normal;opacity:.9}
+  }
+  .hero-art .tag{
+    position:absolute; left:18px; bottom:18px;
+    background:color-mix(in srgb,var(--ivory) 82%,transparent);
+    backdrop-filter:blur(6px);
+    border:1px solid var(--line);
+    border-radius:2px; padding:10px 14px;
+    font-size:13px; line-height:1.4;
+  }
+  .hero-art .tag b{font-family:var(--serif);font-weight:500;font-size:15px;display:block}
+
+  /* marquee strip */
+  .ticker{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--ivory-2);overflow:hidden;white-space:nowrap;
+  }
+  .ticker .track{display:inline-flex;gap:42px;padding:13px 0;animation:slide 26s linear infinite}
+  .ticker span{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-soft);display:inline-flex;align-items:center;gap:42px}
+  .ticker span::after{content:"✦";color:var(--oxblood);font-style:normal}
+  @keyframes slide{to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){.ticker .track{animation:none}}
+
+  /* ---- section heads ---- */
+  section{padding:72px 0}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;margin-bottom:34px;flex-wrap:wrap}
+  .sec-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,7vw,56px);line-height:1;margin:8px 0 0;letter-spacing:-.01em}
+  .sec-head h2 em{font-style:italic;color:var(--oxblood)}
+  .sec-head .eyebrow{margin:0}
+
+  /* ---- collection grid ---- */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(min-width:680px){.grid{grid-template-columns:repeat(3,1fr);gap:18px}}
+  .piece{display:block;position:relative}
+  .piece .ph{
+    aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:var(--ivory-2);position:relative;
+  }
+  .piece .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .piece:hover .ph img{transform:scale(1.04)}
+  .piece .ph .num{
+    position:absolute;top:10px;left:12px;font-family:var(--serif);font-style:italic;
+    font-size:15px;color:var(--ivory);mix-blend-mode:difference;
+  }
+  .piece .meta{display:flex;justify-content:space-between;gap:10px;margin-top:10px;font-size:15px}
+  .piece .meta .name{font-family:var(--serif)}
+  .piece .meta .price{color:var(--ink-soft)}
+  .piece .swatches{display:inline-flex;gap:5px;margin-top:6px}
+  .piece .swatches i{width:10px;height:10px;border-radius:50%;border:1px solid var(--line);display:block}
+
+  /* ---- story band ---- */
+  .story{background:var(--ivory-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .story .inner{display:grid;gap:36px;align-items:center}
+  @media(min-width:840px){.story .inner{grid-template-columns:.8fr 1.2fr;gap:64px}}
+  .story .img{aspect-ratio:4/5;border-radius:2px;overflow:hidden;background:linear-gradient(160deg,var(--blush),var(--gold))}
+  .story .img img{width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:.9}
+  .story .body h2{font-family:var(--serif);font-weight:400;font-size:clamp(32px,6.5vw,52px);line-height:1.08;margin:10px 0 20px;letter-spacing:-.01em}
+  .story .body h2 em{font-style:italic;color:var(--oxblood)}
+  .story .body p{color:var(--ink-soft);max-width:52ch}
+  .story .stats{display:flex;gap:40px;margin-top:32px;flex-wrap:wrap}
+  .story .stat b{font-family:var(--serif);font-size:34px;font-weight:500;display:block;line-height:1}
+  .story .stat span{font-size:13px;color:var(--ink-soft)}
+
+  /* ---- editorial / lookbook ---- */
+  .lookbook .feature{display:grid;gap:24px;grid-template-columns:1fr}
+  @media(min-width:840px){.lookbook .feature{grid-template-columns:1.3fr 1fr;gap:48px;align-items:center}}
+  .lookbook .feature .img{aspect-ratio:5/6;border-radius:2px;overflow:hidden}
+  .lookbook .feature .img img{width:100%;height:100%;object-fit:cover}
+  .lookbook .feature .text h3{font-family:var(--serif);font-weight:400;font-size:clamp(30px,5.5vw,46px);line-height:1.06;margin:0 0 18px;letter-spacing:-.01em}
+  .lookbook .feature .text h3 em{font-style:italic;color:var(--oxblood)}
+  .lookbook .feature .text p{color:var(--ink-soft);max-width:48ch}
+  .lookbook .feature .text .row{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+  .pair .shot{aspect-ratio:3/4;border-radius:2px;overflow:hidden;background:var(--ivory-2)}
+  .pair .shot img{width:100%;height:100%;object-fit:cover}
+
+  /* ---- press ---- */
+  .press{padding:48px 0;border-top:1px solid var(--line)}
+  .press .logos{display:flex;flex-wrap:wrap;gap:34px 44px;align-items:center;justify-content:center}
+  .press .logos span{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink-soft);opacity:.7}
+  .press .logos span.go{font-weight:700;font-style:normal;letter-spacing:.12em;font-size:18px}
+
+  /* ---- newsletter ---- */
+  .news{padding:84px 0}
+  .news .card{
+    border:1px solid var(--line);border-radius:3px;
+    background:linear-gradient(170deg,var(--oxblood),#3a0f1d);
+    color:var(--ivory);padding:46px 24px;text-align:center;
+  }
+  @media (prefers-color-scheme: dark){
+    .news .card{background:linear-gradient(170deg,#3a0f1d,#241015)}
+  }
+  .news .card h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,6vw,46px);line-height:1.08;margin:0 0 14px;letter-spacing:-.01em}
+  .news .card h2 em{font-style:italic;color:var(--blush)}
+  .news .card p{color:rgba(255,255,255,.78);max-width:42ch;margin:0 auto 28px}
+  .news form{display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+  .news input{
+    flex:1;min-width:220px;background:transparent;color:var(--ivory);
+    border:1px solid rgba(255,255,255,.4);border-radius:2px;
+    padding:14px 16px;font-family:var(--sans);font-size:15px;
+  }
+  .news input::placeholder{color:rgba(255,255,255,.6)}
+  .news input:focus{outline:none;border-color:var(--blush)}
+  .news .btn{background:var(--ivory);color:var(--oxblood);border-color:var(--ivory)}
+  @media (prefers-color-scheme: dark){.news .btn{color:#3a0f1d}}
+  .news .note{font-size:12.5px;color:rgba(255,255,255,.55);margin-top:16px}
+  .news .ok{font-family:var(--serif);font-style:italic;color:var(--blush);min-height:1.2em;margin-top:14px}
+
+  /* ---- footer ---- */
+  footer{border-top:1px solid var(--line);padding:54px 0 36px}
+  .foot{display:grid;gap:36px;grid-template-columns:1fr}
+  @media(min-width:720px){.foot{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+  .foot .brand{font-size:30px}
+  .foot .blurb{color:var(--ink-soft);max-width:34ch;margin-top:14px;font-size:15px}
+  .foot h4{font-family:var(--sans);font-weight:500;font-size:14px;margin:0 0 14px;letter-spacing:.01em}
+  .foot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .foot ul a{color:var(--ink-soft);font-size:15px;transition:color .2s}
+  .foot ul a:hover{color:var(--ink)}
+  .foot-bottom{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:13px}
+  .foot-bottom .social{display:flex;gap:18px}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .hero h1 .line span{transform:none}
+    .hero .lede,.hero .ctas{opacity:1;transform:none}
+  }
+
+  :focus-visible{outline:2px solid var(--oxblood);outline-offset:3px;border-radius:2px}
+
+  /* nav icons */
+  .nav-icon{position:relative;background:none;border:0;cursor:pointer;color:var(--ink);display:inline-flex;padding:9px;border-radius:40px;transition:color .2s,background .2s}
+  .nav-icon:hover{color:var(--oxblood)}
+  .nav-icon .count{position:absolute;top:1px;right:0;background:var(--oxblood);color:var(--ivory);font-size:10px;min-width:15px;height:15px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:var(--sans);font-weight:500;line-height:1}
+  .nav-icon .count.zero{display:none}
+
+  /* filter bar */
+  .filters{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:24px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-family:var(--sans);font-size:14px;padding:8px 15px;border:1px solid var(--line);border-radius:40px;background:transparent;color:var(--ink-soft);cursor:pointer;transition:all .2s}
+  .chip:hover{color:var(--ink);border-color:var(--ink-soft)}
+  .chip.active{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+  .sort{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-soft);margin-left:auto}
+  .sort select{font-family:var(--sans);font-size:14px;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:40px;padding:7px 12px;cursor:pointer}
+  .sort select:focus-visible{outline-offset:1px}
+
+  /* piece + wishlist */
+  .piece{cursor:pointer;display:block}
+  .piece .ph{position:relative}
+  .wish-btn{position:absolute;top:9px;right:9px;width:34px;height:34px;border-radius:50%;border:0;background:color-mix(in srgb,var(--ivory) 82%,transparent);backdrop-filter:blur(6px);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink);z-index:2;transition:transform .15s,color .2s}
+  .wish-btn:hover{transform:scale(1.12)}
+  .wish-btn.active{color:var(--oxblood)}
+  .wish-btn.active svg path{fill:var(--oxblood)}
+  .piece .quick-hint{position:absolute;bottom:0;left:0;right:0;padding:9px;text-align:center;background:color-mix(in srgb,var(--ink) 90%,transparent);color:var(--ivory);font-size:13px;transform:translateY(100%);transition:transform .25s;letter-spacing:.01em}
+  .piece:hover .quick-hint,.piece:focus-visible .quick-hint{transform:none}
+  @media(hover:none){.piece .quick-hint{display:none}}
+  .empty{grid-column:1/-1;text-align:center;color:var(--ink-soft);padding:54px 10px;font-style:italic;font-family:var(--serif);font-size:19px}
+
+  /* overlay + sheets */
+  .overlay{position:fixed;inset:0;background:rgba(28,23,20,.45);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:50}
+  .overlay.open{opacity:1;visibility:visible}
+  .sheet{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:var(--ivory);z-index:60;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(0,0,0,.18)}
+  .sheet.open{transform:none}
+  .sheet .head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+  .sheet .head h3{font-family:var(--serif);font-weight:500;font-size:23px;margin:0}
+  .sheet .close{font-size:28px;background:none;border:0;cursor:pointer;color:var(--ink);line-height:1}
+  .sheet .body{overflow-y:auto;padding:18px 20px;flex:1;-webkit-overflow-scrolling:touch}
+  .sheet .foot{padding:16px 20px;border-top:1px solid var(--line)}
+  .sheet .total{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;margin-bottom:14px;color:var(--ink-soft)}
+  .sheet .total b{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--ink)}
+  .btn.full{width:100%;justify-content:center}
+
+  .cart-item,.sv-item{display:flex;gap:13px;padding:15px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+  .ci-img,.sv-img{width:60px;height:78px;border-radius:2px;overflow:hidden;flex-shrink:0;background:var(--ivory-2)}
+  .ci-img img,.sv-img img{width:100%;height:100%;object-fit:cover}
+  .ci-body,.sv-body{flex:1;min-width:0}
+  .ci-name,.sv-name{font-family:var(--serif);font-size:17px;line-height:1.2;display:block}
+  .ci-meta{font-size:13px;color:var(--ink-soft);margin:4px 0 9px}
+  .ci-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .ci-price{font-family:var(--serif);font-size:16px}
+  .qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:40px;overflow:hidden}
+  .qty button{width:30px;height:30px;background:none;border:0;cursor:pointer;color:var(--ink);font-size:16px;line-height:1}
+  .qty span{min-width:24px;text-align:center;font-size:14px}
+  .ci-remove,.sv-remove{background:none;border:0;color:var(--ink-soft);font-size:13px;cursor:pointer;text-decoration:underline;text-align:left;padding:0;margin-top:8px;display:block}
+  .sv-add{margin-top:9px}
+  .mini-empty{text-align:center;color:var(--ink-soft);padding:50px 10px;font-style:italic;font-family:var(--serif);font-size:18px}
+
+  /* quick view */
+  .qv{position:fixed;inset:0;z-index:70;display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;background:rgba(28,23,20,.45);padding:0}
+  .qv.open{opacity:1;visibility:visible}
+  .qv-card{position:relative;background:var(--ivory);width:100%;max-width:860px;max-height:92vh;overflow-y:auto;border-radius:8px 8px 0 0;transform:translateY(50px);transition:transform .35s cubic-bezier(.2,.8,.2,1);display:grid;grid-template-columns:1fr}
+  .qv.open .qv-card{transform:none}
+  @media(min-width:760px){.qv{align-items:center;padding:24px}.qv-card{grid-template-columns:1fr 1fr;border-radius:8px;transform:translateY(30px) scale(.98)}}
+  .qv-img{aspect-ratio:3/4;overflow:hidden;background:var(--ivory-2)}
+  .qv-img img{width:100%;height:100%;object-fit:cover}
+  .qv-close{position:absolute;top:12px;right:14px;width:36px;height:36px;border-radius:50%;border:0;background:color-mix(in srgb,var(--ivory) 88%,transparent);backdrop-filter:blur(6px);cursor:pointer;font-size:22px;z-index:2;color:var(--ink);line-height:1}
+  .qv-info{padding:26px 24px;display:flex;flex-direction:column}
+  .qv-cat{font-size:13px;color:var(--ink-soft);margin:0 0 6px}
+  .qv-info h3{font-family:var(--serif);font-weight:400;font-size:30px;margin:0 0 8px;letter-spacing:-.01em;line-height:1}
+  .qv-price{font-family:var(--serif);font-size:22px;margin:0 0 16px}
+  .qv-desc{color:var(--ink-soft);font-size:15px;margin:0 0 18px}
+  .qv-label{font-size:13px;color:var(--ink-soft);margin:0 0 9px}
+  .swatch-row{display:flex;gap:9px;margin-bottom:18px}
+  .swatch{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);cursor:pointer;position:relative;transition:transform .15s}
+  .swatch:hover{transform:scale(1.1)}
+  .swatch.sel{outline:2px solid var(--ink);outline-offset:2px}
+  .size-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+  .size-btn{min-width:46px;padding:10px 14px;border:1px solid var(--line);background:transparent;font-family:var(--sans);font-size:14px;cursor:pointer;border-radius:2px;color:var(--ink);transition:all .2s}
+  .size-btn:hover{border-color:var(--ink-soft)}
+  .size-btn.sel{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+  .qv-actions{display:flex;gap:10px;margin-top:auto}
+  .qv-wish{width:48px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);background:none;cursor:pointer;color:var(--ink);border-radius:2px;transition:color .2s,border-color .2s}
+  .qv-wish:hover{border-color:var(--ink-soft)}
+  .qv-wish.active{color:var(--oxblood);border-color:var(--oxblood)}
+  .qv-wish.active svg path{fill:var(--oxblood)}
+
+  /* toast */
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);background:var(--ink);color:var(--ivory);padding:13px 22px;border-radius:40px;font-size:14px;z-index:90;opacity:0;transition:transform .35s,opacity .35s;box-shadow:0 12px 32px rgba(0,0,0,.28);display:flex;gap:14px;align-items:center;max-width:90vw}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+  .toast a{color:var(--blush);text-decoration:underline;white-space:nowrap}
+  body.no-scroll{overflow:hidden}
+</style>
+</head>
+<body>
+
+<!-- header -->
+<header>
+  <div class="nav">
+    <a class="brand" href="#top">Wendy<i>.</i></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#collection">Collection</a>
+      <a href="#story">Atelier</a>
+      <a href="#lookbook">Lookbook</a>
+      <a href="#news">Journal</a>
+    </nav>
+    <div class="nav-right">
+      <button class="nav-icon" id="savedBtn" aria-label="Saved pieces">
+        <svg viewBox="0 0 24 24" width="21" height="21"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span class="count" id="savedCount">0</span>
+      </button>
+      <button class="nav-icon" id="cartBtn" aria-label="Bag">
+        <svg viewBox="0 0 24 24" width="21" height="21"><path d="M6 8h12l-1 12H7L6 8z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span class="count" id="cartCount">0</span>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- mobile drawer -->
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="top">
+    <a class="brand" href="#top" data-close>Wendy<i>.</i></a>
+    <button class="close" id="closeBtn" aria-label="Close menu">×</button>
+  </div>
+  <nav>
+    <a href="#collection" data-close>Collection</a>
+    <a href="#story" data-close>Atelier</a>
+    <a href="#lookbook" data-close>Lookbook</a>
+    <a href="#news" data-close>Journal</a>
+    <a href="#" data-close>Shop the bag</a>
+  </nav>
+</div>
+
+<!-- hero -->
+<section class="hero" id="top" style="padding-top:54px">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Autumn / Winter — Vol. 04</p>
+        <h1>
+          <span class="line"><span>Quiet clothes</span></span>
+          <span class="line"><span>for <em>loud</em></span></span>
+          <span class="line"><span>days.</span></span>
+        </h1>
+        <p class="lede">Considered, tactile pieces made in small runs from natural fibres — for women who dress for themselves first, and the room second.</p>
+        <div class="ctas">
+          <a class="btn" href="#collection">Shop the collection <span class="arr">→</span></a>
+          <a class="btn ghost" href="#story">Meet the atelier</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=900&q=80" alt="Wendy model wearing the season wool coat" />
+          <div class="tag">
+            <b>The Mercer Coat</b>
+            <span>Boiled wool · camel</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ticker -->
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    <span>Made in small runs</span><span>Linen · wool · silk</span><span>Free alterations, always</span><span>Atelier in Lisbon</span><span>Made in small runs</span><span>Linen · wool · silk</span><span>Free alterations, always</span><span>Atelier in Lisbon</span>
+  </div>
+</div>
+
+<!-- collection -->
+<section id="collection">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">The collection</p>
+        <h2>Eight pieces, <em>no more.</em></h2>
+      </div>
+      <a class="btn ghost" href="#" id="viewAllBtn">View all →</a>
+    </div>
+
+    <div class="filters reveal" id="filters">
+      <div class="chips" id="chips">
+        <button class="chip active" data-cat="all">All</button>
+        <button class="chip" data-cat="Outerwear">Outerwear</button>
+        <button class="chip" data-cat="Dresses">Dresses</button>
+        <button class="chip" data-cat="Knitwear">Knitwear</button>
+        <button class="chip" data-cat="Tailoring">Tailoring</button>
+        <button class="chip" data-cat="Tops">Tops</button>
+        <button class="chip" data-cat="Skirts">Skirts</button>
+      </div>
+      <div class="sort">
+        <label for="sortSel">Sort</label>
+        <select id="sortSel">
+          <option value="feat">Featured</option>
+          <option value="new">Newest</option>
+          <option value="low">Price · low to high</option>
+          <option value="high">Price · high to low</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid" id="grid">
+      <article class="piece reveal" data-id="mercer" data-cat="Outerwear" data-price="420" data-name="The Mercer Coat" data-new="1" tabindex="0" role="button" aria-label="The Mercer Coat, €420">
+        <div class="ph">
+          <span class="num">01</span>
+          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80" alt="The Mercer Coat" loading="lazy" />
+          <button class="wish-btn" data-wish="mercer" aria-label="Save The Mercer Coat"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <div class="quick-hint">Quick view</div>
+        </div>
+        <div class="meta"><span class="name">The Mercer Coat</span><span class="price">€420</span></div>
+        <div class="swatches"><i style="background:#B08A55"></i><i style="background:#1C1714"></i><i style="background:#E6BFB0"></i></div>
+      </article>
+      <article class="piece reveal" data-id="marlowe" data-cat="Dresses" data-price="285" data-name="Marlowe Slip Dress" data-new="1" tabindex="0" role="button" aria-label="Marlowe Slip Dress, €285">
+        <div class="ph">
+          <span class="num">02</span>
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43a?auto=format&fit=crop&w=600&q=80" alt="Marlowe Slip Dress" loading="lazy" />
+          <button class="wish-btn" data-wish="marlowe" aria-label="Save Marlowe Slip Dress"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <div class="quick-hint">Quick view</div>
+        </div>
+        <div class="meta"><span class="name">Marlowe Slip Dress</span><span class="price">€285</span></div>
+        <div class="swatches"><i style="background:#5C1A2B"></i><i style="background:#1C1714"></i></div>
+      </article>
+      <article class="piece reveal" data-id="hollow" data-cat="Knitwear" data-price="210" data-name="Hollow Knit" data-new="0" tabindex="0" role="button" aria-label="Hollow Knit, €210">
+        <div class="ph">
+          <span class="num">03</span>
+          <img src="https://images.unsplash.com/photo-1485518882345-15568b007407?auto=format&fit=crop&w=600&q=80" alt="Hollow Knit" loading="lazy" />
+          <button class="wish-btn" data-wish="hollow" aria-label="Save Hollow Knit"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <div class="quick-hint">Quick view</div>
+        </div>
+        <div class="meta"><span class="name">Hollow Knit</span><span class="price">€210</span></div>
+        <div class="swatches"><i style="background:#E6BFB0"></i><i style="background:#B0A288"></i></div>
+      </article>
+      <article class="piece reveal" data-id="tate" data-cat="Tailoring" data-price="190" data-name="Tate Trouser" data-new="0" tabindex="0" role="button" aria-label="Tate Trouser, €190">
+        <div class="ph">
+          <span class="num">04</span>
+          <img src="https://images.unsplash.com/photo-1485462537746-965f33f7f7a7?auto=format&fit=crop&w=600&q=80" alt="Tate Trouser" loading="lazy" />
+          <button class="wish-btn" data-wish="tate" aria-label="Save Tate Trouser"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <div class="quick-hint">Quick view</div>
+        </div>
+        <div class="meta"><span class="name">Tate Trouser</span><span class="price">€190</span></div>
+        <div class="swatches"><i style="background:#1C1714"></i><i style="background:#8A8178"></i></div>
+      </article>
+      <article class="piece reveal" data-id="blouse" data-cat="Tops" data-price="165" data-name="Soft Shoulder Blouse" data-new="0" tabindex="0" role="button" aria-label="Soft Shoulder Blouse, €165">
+        <div class="ph">
+          <span class="num">05</span>
+          <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=600&q=80" alt="Soft Shoulder Blouse" loading="lazy" />
+          <button class="wish-btn" data-wish="blouse" aria-label="Save Soft Shoulder Blouse"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <div class="quick-hint">Quick view</div>
+        </div>
+        <div class="meta"><span class="name">Soft Shoulder Blouse</span><span class="price">€165</span></div>
+        <div class="swatches"><i style="background:#F5EFE7"></i><i style="background:#5C1A2B"></i></div>
+      </article>
+      <article class="piece reveal" data-id="field" data-cat="Skirts" data-price="220" data-name="Field Skirt" data-new="1" tabindex="0" role="button" aria-label="Field Skirt, €220">
+        <div class="ph">
+          <span class="num">06</span>
+          <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=600&q=80" alt="Field Skirt" loading="lazy" />
+          <button class="wish-btn" data-wish="field" aria-label="Save Field Skirt"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          <div class="quick-hint">Quick view</div>
+        </div>
+        <div class="meta"><span class="name">Field Skirt</span><span class="price">€220</span></div>
+        <div class="swatches"><i style="background:#8A8178"></i><i style="background:#1C1714"></i></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- story -->
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="inner">
+      <div class="img reveal">
+        <img src="https://images.unsplash.com/photo-1581344947727-1da7b06d7e6c?auto=format&fit=crop&w=800&q=80" alt="Inside the Wendy atelier in Lisbon" />
+      </div>
+      <div class="body reveal">
+        <p class="eyebrow">The atelier</p>
+        <h2>Made the <em>slow</em> way, on purpose.</h2>
+        <p>Wendy began around one cutting table in a small Lisbon studio, with the idea that fewer, better garments could be a quiet form of resistance. Every piece is cut and finished by a team of four, in runs of 60 or fewer, from natural fibres sourced within Europe.</p>
+        <p>We alter anything you buy, for as long as you own it. If it can't be repaired, we'll take it back.</p>
+        <div class="stats">
+          <div class="stat"><b>60</b><span>max pieces per run</span></div>
+          <div class="stat"><b>4</b><span>hands at the table</span></div>
+          <div class="stat"><b>100%</b><span>natural fibres</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- lookbook -->
+<section class="lookbook" id="lookbook">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <p class="eyebrow">Lookbook · A/W 04</p>
+        <h2>How it <em>wears.</em></h2>
+      </div>
+    </div>
+
+    <div class="feature reveal">
+      <div class="img">
+        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=80" alt="Look one — Mercer coat over Tate trouser" />
+      </div>
+      <div class="text">
+        <h3>Look one — <em>office to elsewhere.</em></h3>
+        <p>The Mercer coat worn open over the Tate trouser and a Soft Shoulder blouse. Built to move between a long Tuesday and a late dinner without changing the bones of it.</p>
+        <div class="row">
+          <a class="btn ghost" href="#">Shop the look →</a>
+          <a class="btn" href="#collection">See all pieces</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pair reveal">
+      <div class="shot"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Look two — Marlowe slip dress" /></div>
+      <div class="shot"><img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43a?auto=format&fit=crop&w=600&q=80" alt="Look three — Hollow knit layered" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- press -->
+<section class="press">
+  <div class="wrap">
+    <div class="logos">
+      <span class="go">VOGUE</span>
+      <span>Kinfolk</span>
+      <span>The Gentlewoman</span>
+      <span class="go">ELLE</span>
+      <span>Cereal</span>
+      <span>Monocle</span>
+    </div>
+  </div>
+</section>
+
+<!-- newsletter -->
+<section class="news" id="news">
+  <div class="wrap">
+    <div class="card reveal">
+      <h2>First look, <em>first dibs.</em></h2>
+      <p>New runs arrive six times a year and they sell out fast. Join the list for an early window before pieces go public.</p>
+      <form id="nlForm" novalidate>
+        <input type="email" id="nlEmail" placeholder="your@email.com" aria-label="Email address" required />
+        <button class="btn" type="submit">Join the list</button>
+      </form>
+      <p class="note">No noise. One email per release, unsubscribe in a tap.</p>
+      <p class="ok" id="nlOk" role="status"></p>
+    </div>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top">Wendy<i>.</i></a>
+        <p class="blurb">Quiet clothes for loud days. Cut and finished in Lisbon, in small runs, from natural fibres.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#collection">Collection</a></li>
+          <li><a href="#lookbook">Lookbook</a></li>
+          <li><a href="#">Gift cards</a></li>
+          <li><a href="#">Alterations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Atelier</h4>
+        <ul>
+          <li><a href="#story">Our story</a></li>
+          <li><a href="#">Materials</a></li>
+          <li><a href="#">Repairs &amp; returns</a></li>
+          <li><a href="#">Stockists</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Sizing</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Care guide</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2024 Wendy Atelier, Lda · Rua das Flores, Lisbon</span>
+      <div class="social">
+        <a href="#">Instagram</a><a href="#">Pinterest</a><a href="#">Substack</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- overlays & sheets -->
+<div class="overlay" id="overlay"></div>
+
+<!-- quick view -->
+<div class="qv" id="quickView" aria-hidden="true">
+  <div class="qv-card" id="qvCard">
+    <button class="qv-close" id="qvClose" aria-label="Close">×</button>
+    <div class="qv-img"><img id="qvImg" src="" alt="" /></div>
+    <div class="qv-info">
+      <p class="qv-cat" id="qvCat"></p>
+      <h3 id="qvName"></h3>
+      <p class="qv-price" id="qvPrice"></p>
+      <p class="qv-desc" id="qvDesc"></p>
+      <p class="qv-label">Colour — <span id="qvColorName"></span></p>
+      <div class="swatch-row" id="qvColors"></div>
+      <p class="qv-label">Size</p>
+      <div class="size-row" id="qvSizes"></div>
+      <div class="qv-actions">
+        <button class="btn" id="qvAdd" style="flex:1;justify-content:center">Add to bag · <span id="qvAddPrice"></span></button>
+        <button class="qv-wish" id="qvWish" aria-label="Save"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21s-7-4.35-9.5-8.5C.5 8.5 3 5 6.5 5c2 0 3.5 1 5.5 3 2-2 3.5-3 5.5-3 3.5 0 6 3.5 4 7.5C19 16.65 12 21 12 21z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- cart drawer -->
+<aside class="sheet" id="cartSheet" aria-hidden="true" aria-label="Bag">
+  <div class="head"><h3>Bag</h3><button class="close" data-sheet-close aria-label="Close">×</button></div>
+  <div class="body" id="cartBody"></div>
+  <div class="foot" id="cartFoot"></div>
+</aside>
+
+<!-- saved drawer -->
+<aside class="sheet" id="savedSheet" aria-hidden="true" aria-label="Saved">
+  <div class="head"><h3>Saved</h3><button class="close" data-sheet-close aria-label="Close">×</button></div>
+  <div class="body" id="savedBody"></div>
+</aside>
+
+<!-- toast -->
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+  // hero entrance
+  requestAnimationFrame(()=>{document.querySelector('.hero').classList.add('in');});
+
+  // reveal on scroll
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.14, rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // mobile menu
+  const drawer = document.getElementById('drawer');
+  const openBtn = document.getElementById('menuBtn');
+  const closeBtn = document.getElementById('closeBtn');
+  function setDrawer(open){
+    drawer.classList.toggle('open', open);
+    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    openBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  openBtn.addEventListener('click', ()=>setDrawer(true));
+  closeBtn.addEventListener('click', ()=>setDrawer(false));
+  document.querySelectorAll('[data-close]').forEach(a=>a.addEventListener('click', ()=>setDrawer(false)));
+
+  // newsletter (local only)
+  const form = document.getElementById('nlForm');
+  const ok = document.getElementById('nlOk');
+  const email = document.getElementById('nlEmail');
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const v = email.value.trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ ok.textContent = 'Please enter a valid email.'; return; }
+    try{ localStorage.setItem('wendy_nl', v); }catch(_){}
+    ok.textContent = "You're on the list — first look arriving soon.";
+    email.value = '';
+  });
+
+  /* ---------- commerce: products, cart, wishlist, filter ---------- */
+  const $ = (s,r=document)=>r.querySelector(s);
+  const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+  const euro = n => '€' + n;
+
+  const PRODUCTS = {
+    mercer:{name:'The Mercer Coat',price:420,cat:'Outerwear',new:true,
+      img:'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=900&q=80',
+      desc:'A double-faced boiled-wool coat with a clean dropped shoulder. Cut wide enough for a knit underneath, narrow enough to keep its line. Made in Lisbon in runs of 60.',
+      colors:[['#B08A55','Camel'],['#1C1714','Ink'],['#E6BFB0','Blush']],sizes:['XS','S','M','L']},
+    marlowe:{name:'Marlowe Slip Dress',price:285,cat:'Dresses',new:true,
+      img:'https://images.unsplash.com/photo-1490481651871-ab68de25d43a?auto=format&fit=crop&w=900&q=80',
+      desc:'Bias-cut silk slip that falls without effort. Adjustable straps, a low back, a hem that lands mid-calf.',
+      colors:[['#5C1A2B','Oxblood'],['#1C1714','Ink']],sizes:['XS','S','M','L']},
+    hollow:{name:'Hollow Knit',price:210,cat:'Knitwear',new:false,
+      img:'https://images.unsplash.com/photo-1485518882345-15568b007407?auto=format&fit=crop&w=900&q=80',
+      desc:'A featherweight merino knit with an open stitch at the collar. Layered or alone, it breathes through the seasons.',
+      colors:[['#E6BFB0','Blush'],['#B0A288','Stone']],sizes:['XS','S','M','L']},
+    tate:{name:'Tate Trouser',price:190,cat:'Tailoring',new:false,
+      img:'https://images.unsplash.com/photo-1485462537746-965f33f7f7a7?auto=format&fit=crop&w=900&q=80',
+      desc:'A high-waisted wool trouser with a gentle pleat and a tapered leg. Tailored to sit, then to move.',
+      colors:[['#1C1714','Ink'],['#8A8178','Stone']],sizes:['XS','S','M','L']},
+    blouse:{name:'Soft Shoulder Blouse',price:165,cat:'Tops',new:false,
+      img:'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=900&q=80',
+      desc:'A washed-silk blouse with a dropped shoulder and a softly rolled collar. Tucks in, or doesn’t.',
+      colors:[['#F5EFE7','Ivory'],['#5C1A2B','Oxblood']],sizes:['XS','S','M','L']},
+    field:{name:'Field Skirt',price:220,cat:'Skirts',new:true,
+      img:'https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=900&q=80',
+      desc:'A mid-calf wrap skirt in brushed cotton. Two buttons, one tie, and a pocket that actually holds a phone.',
+      colors:[['#8A8178','Stone'],['#1C1714','Ink']],sizes:['XS','S','M','L']}
+  };
+
+  // storage
+  const load = (k,d) => { try{ const v=JSON.parse(localStorage.getItem(k)); return v??d; }catch(_){return d;} };
+  const save = (k,v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(_){} };
+  let cart = load('wendy_cart', []);     // {id,color,size,qty}
+  let saved = load('wendy_saved', []);    // ids
+
+  // ---------- toast ----------
+  const toastEl = $('#toast'); let toastT;
+  function toast(msg, link){
+    clearTimeout(toastT);
+    toastEl.innerHTML = link ? msg + ` <a href="#" data-toast-link>${link}</a>` : msg;
+    toastEl.classList.add('show');
+    toastT = setTimeout(()=>toastEl.classList.remove('show'), 3200);
+  }
+  toastEl.addEventListener('click', e=>{ if(e.target.matches('[data-toast-link]')){ e.preventDefault(); openSheet('cart'); }});
+
+  // ---------- overlays / sheets ----------
+  const overlay = $('#overlay');
+  const body = document.body;
+  let activeSheet = null;
+  function openSheet(id){
+    closeQuickView();
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.add('open'); el.setAttribute('aria-hidden','false');
+    overlay.classList.add('open');
+    body.classList.add('no-scroll');
+    activeSheet = el;
+  }
+  function closeSheet(){
+    if(activeSheet){ activeSheet.classList.remove('open'); activeSheet.setAttribute('aria-hidden','true'); }
+    overlay.classList.remove('open');
+    body.classList.remove('no-scroll');
+    activeSheet = null;
+  }
+  $('#cartBtn').addEventListener('click', ()=>{ renderCart(); openSheet('cartSheet'); });
+  $('#savedBtn').addEventListener('click', ()=>{ renderSaved(); openSheet('savedSheet'); });
+  overlay.addEventListener('click', closeSheet);
+  $$('[data-sheet-close]').forEach(b=>b.addEventListener('click', closeSheet));
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeSheet(); closeQuickView(); setDrawer(false); } });
+
+  // ---------- counts ----------
+  function refreshCounts(){
+    const cc = cart.reduce((n,i)=>n+i.qty,0);
+    $('#cartCount').textContent = cc; $('#cartCount').classList.toggle('zero', cc===0);
+    $('#savedCount').textContent = saved.length; $('#savedCount').classList.toggle('zero', saved.length===0);
+    $$('.wish-btn').forEach(b=>b.classList.toggle('active', saved.includes(b.dataset.wish)));
+    const qvw = $('#qvWish'); if(qvw && qvw.dataset.id) qvw.classList.toggle('active', saved.includes(qvw.dataset.id));
+  }
+
+  // ---------- wishlist ----------
+  function toggleSave(id){
+    const p = PRODUCTS[id]; if(!p) return;
+    if(saved.includes(id)){ saved = saved.filter(x=>x!==id); }
+    else { saved.push(id); toast(`${p.name} saved.`); }
+    save('wendy_saved', saved); refreshCounts();
+    if(activeSheet && activeSheet.id==='savedSheet') renderSaved();
+  }
+  $$('.wish-btn').forEach(b=>b.addEventListener('click', e=>{ e.stopPropagation(); e.preventDefault(); toggleSave(b.dataset.wish); }));
+
+  function renderSaved(){
+    const el = $('#savedBody');
+    if(!saved.length){ el.innerHTML = '<div class="mini-empty">No pieces saved yet.<br>Tap the heart on anything you’d like to keep close.</div>'; return; }
+    el.innerHTML = saved.map(id=>{
+      const p = PRODUCTS[id]; if(!p) return '';
+      return `<div class="sv-item">
+        <div class="sv-img"><img src="${p.img}" alt="${p.name}"></div>
+        <div class="sv-body">
+          <span class="sv-name">${p.name}</span>
+          <div style="font-family:var(--serif);font-size:16px;margin-top:2px">${euro(p.price)}</div>
+          <button class="sv-add btn" data-sv-add="${id}" style="padding:9px 16px;font-size:14px">Add to bag</button>
+          <button class="sv-remove" data-sv-remove="${id}">Remove</button>
+        </div>
+      </div>`;
+    }).join('');
+    $$('[data-sv-add]', el).forEach(b=>b.addEventListener('click', ()=>{ addToBag(b.dataset.svAdd); }));
+    $$('[data-sv-remove]', el).forEach(b=>b.addEventListener('click', ()=>{ toggleSave(b.dataset.svRemove); }));
+  }
+
+  // ---------- quick view ----------
+  const qv = $('#quickView'), qvCard=$('#qvCard');
+  let qvState = {id:null,colorIdx:0,size:null};
+  function openQuickView(id){
+    const p = PRODUCTS[id]; if(!p) return;
+    closeSheet();
+    qvState = {id, colorIdx:0, size:p.sizes[1]||p.sizes[0]};
+    $('#qvImg').src = p.img; $('#qvImg').alt = p.name;
+    $('#qvCat').textContent = p.cat + (p.new ? ' · new in' : '');
+    $('#qvName').textContent = p.name;
+    $('#qvPrice').textContent = euro(p.price);
+    $('#qvDesc').textContent = p.desc;
+    $('#qvColors').innerHTML = p.colors.map((c,i)=>`<button class="swatch${i===0?' sel':''}" style="background:${c[0]}" data-ci="${i}" aria-label="${c[1]}" title="${c[1]}"></button>`).join('');
+    $('#qvColorName').textContent = p.colors[0][1];
+    $('#qvSizes').innerHTML = p.sizes.map(s=>`<button class="size-btn${s===qvState.size?' sel':''}" data-size="${s}">${s}</button>`).join('');
+    $('#qvAddPrice').textContent = euro(p.price);
+    const w = $('#qvWish'); w.dataset.id = id; w.classList.toggle('active', saved.includes(id));
+    qv.classList.add('open'); qv.setAttribute('aria-hidden','false'); overlay.classList.add('open'); body.classList.add('no-scroll');
+  }
+  function closeQuickView(){
+    if(qv.classList.contains('open')){
+      qv.classList.remove('open'); qv.setAttribute('aria-hidden','true');
+      if(!activeSheet){ overlay.classList.remove('open'); body.classList.remove('no-scroll'); }
+    }
+  }
+  $('#qvClose').addEventListener('click', closeQuickView);
+  overlay.addEventListener('click', closeQuickView);
+  $('#qvColors').addEventListener('click', e=>{ const b=e.target.closest('.swatch'); if(!b) return; qvState.colorIdx=+b.dataset.ci; $$('.swatch',qvCard).forEach(s=>s.classList.toggle('sel', s===b)); $('#qvColorName').textContent=PRODUCTS[qvState.id].colors[qvState.colorIdx][1]; });
+  $('#qvSizes').addEventListener('click', e=>{ const b=e.target.closest('.size-btn'); if(!b) return; qvState.size=b.dataset.size; $$('.size-btn',qvCard).forEach(s=>s.classList.toggle('sel', s===b)); });
+  $('#qvAdd').addEventListener('click', ()=>addToBag(qvState.id, qvState.colorIdx, qvState.size));
+  $('#qvWish').addEventListener('click', ()=>toggleSave($('#qvWish').dataset.id));
+
+  // open quick view from grid
+  $$('.piece').forEach(card=>{
+    card.addEventListener('click', e=>{ if(e.target.closest('.wish-btn')) return; openQuickView(card.dataset.id); });
+    card.addEventListener('keydown', e=>{ if((e.key==='Enter'||e.key===' ') && !e.target.closest('.wish-btn')){ e.preventDefault(); openQuickView(card.dataset.id); } });
+  });
+
+  // ---------- cart ----------
+  function addToBag(id, colorIdx, size){
+    const p = PRODUCTS[id]; if(!p) return;
+    colorIdx = colorIdx ?? 0; size = (size ?? p.sizes[1]) || p.sizes[0];
+    const key = id+'|'+colorIdx+'|'+size;
+    const ex = cart.find(i=>i.key===key);
+    if(ex) ex.qty++; else cart.push({key,id,color:colorIdx,size,qty:1});
+    save('wendy_cart', cart); refreshCounts(); renderCart();
+    toast(`${p.name} added.`, 'View bag');
+    closeQuickView();
+  }
+  function changeQty(key, d){
+    const it = cart.find(i=>i.key===key); if(!it) return;
+    it.qty += d; if(it.qty<=0) cart = cart.filter(i=>i!==it);
+    save('wendy_cart', cart); refreshCounts(); renderCart();
+  }
+  function removeItem(key){ cart = cart.filter(i=>i.key!==key); save('wendy_cart', cart); refreshCounts(); renderCart(); }
+
+  function renderCart(){
+    const body = $('#cartBody'), foot = $('#cartFoot');
+    if(!cart.length){
+      body.innerHTML = '<div class="mini-empty">Your bag is empty.</div>';
+      foot.innerHTML = `<button class="btn ghost full" data-close-cart>Browse the collection</button>`;
+      const b = foot.querySelector('[data-close-cart]'); if(b) b.addEventListener('click', ()=>{ closeSheet(); document.getElementById('collection').scrollIntoView({behavior:'smooth'}); });
+      return;
+    }
+    body.innerHTML = cart.map(i=>{
+      const p = PRODUCTS[i.id]; if(!p) return '';
+      return `<div class="cart-item">
+        <div class="ci-img"><img src="${p.img}" alt="${p.name}"></div>
+        <div class="ci-body">
+          <span class="ci-name">${p.name}</span>
+          <div class="ci-meta">${p.colors[i.color]?.[1]||''} · ${i.size}</div>
+          <div class="ci-row">
+            <div class="qty"><button data-dec="${i.key}">−</button><span>${i.qty}</span><button data-inc="${i.key}">+</button></div>
+            <span class="ci-price">${euro(p.price*i.qty)}</span>
+          </div>
+          <button class="ci-remove" data-rm="${i.key}">Remove</button>
+        </div>
+      </div>`;
+    }).join('');
+    $$('[data-inc]',body).forEach(b=>b.addEventListener('click',()=>changeQty(b.dataset.inc,1)));
+    $$('[data-dec]',body).forEach(b=>b.addEventListener('click',()=>changeQty(b.dataset.dec,-1)));
+    $$('[data-rm]',body).forEach(b=>b.addEventListener('click',()=>removeItem(b.dataset.rm)));
+    const total = cart.reduce((n,i)=>n + (PRODUCTS[i.id]?.price||0)*i.qty, 0);
+    foot.innerHTML = `<div class="total"><span>Subtotal</span><b>${euro(total)}</b></div>
+      <button class="btn full" id="checkoutBtn">Checkout · ${euro(total)}</button>`;
+    $('#checkoutBtn').addEventListener('click', ()=>{ toast('Checkout is a demo — nothing has been charged.'); });
+  }
+
+  // ---------- filter / sort ----------
+  let curCat='all', curSort='feat';
+  function applyFilters(){
+    let items = $$('.piece');
+    if(curCat!=='all') items = items.filter(p=>p.dataset.cat===curCat);
+    items.sort((a,b)=>{
+      if(curSort==='low') return +a.dataset.price - +b.dataset.price;
+      if(curSort==='high') return +b.dataset.price - +a.dataset.price;
+      if(curSort==='new') return (+b.dataset.new) - (+a.dataset.new);
+      return 0;
+    });
+    const grid = $('#grid');
+    items.forEach(p=>grid.appendChild(p));
+    const any = items.some(p=>p.dataset.cat===curCat || curCat==='all');
+    let empty = grid.querySelector('.empty');
+    if(!any){ if(!empty){ empty=document.createElement('div'); empty.className='empty'; empty.textContent='Nothing in this category yet.'; grid.appendChild(empty);} }
+    else if(empty){ empty.remove(); }
+  }
+  $('#chips').addEventListener('click', e=>{ const c=e.target.closest('.chip'); if(!c) return; curCat=c.dataset.cat; $$('.chip').forEach(x=>x.classList.toggle('active',x===c)); applyFilters(); });
+  $('#sortSel').addEventListener('change', e=>{ curSort=e.target.value; applyFilters(); });
+  $('#viewAllBtn').addEventListener('click', e=>{ e.preventDefault(); curCat='all'; curSort='feat'; $$('.chip').forEach(x=>x.classList.toggle('active',x.dataset.cat==='all')); $('#sortSel').value='feat'; applyFilters(); });
+
+  refreshCounts();
+</script>
+</body>
+</html>
